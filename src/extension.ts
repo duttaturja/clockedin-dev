@@ -1,26 +1,83 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { Timer } from './timer';
+import { GitPusher } from './git';
+import { Dashboard } from './dashboard';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+let timer = new Timer();
+let dashboard: Dashboard | undefined;
+
 export function activate(context: vscode.ExtensionContext) {
+  const config = vscode.workspace.getConfiguration('clockedin');
+  if (!config.get<boolean>('enabled')) {
+    console.log('CLockedIn is disabled via settings');
+    return;
+  }
+  console.log('CLockedIn active');
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "clockedin-dev" is now active!');
+  const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
+  statusBar.text = `CLockedIn: ${timer.formatTime()}`;
+  statusBar.show();
+  context.subscriptions.push(statusBar);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('clockedin-dev.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from ClockedIn!');
-	});
+  // Commands
+  context.subscriptions.push(
+    vscode.commands.registerCommand('clockedin.startTimer', () => {
+      if (!config.get<boolean>('enabled')) return;
+      if (!timer.isRunning()) timer.start();
+      vscode.window.showInformationMessage('Timer started');
+    }),
+    vscode.commands.registerCommand('clockedin.showStats', () => {
+      if (!config.get<boolean>('enabled')) return;
+      vscode.window.showInformationMessage(timer.summary());
+    }),
+    vscode.commands.registerCommand('clockedin.showDashboard', () => {
+      if (!config.get<boolean>('enabled')) return;
+      if (!dashboard) dashboard = new Dashboard(context.extensionUri);
+      dashboard.show();
+      dashboard.update(timer.summary());
+    })
+  );
 
-	context.subscriptions.push(disposable);
+  // Auto start/stop
+  context.subscriptions.push(
+    vscode.workspace.onDidOpenTextDocument(() => {
+      if (config.get<boolean>('enabled') && !timer.isRunning()) timer.start();
+    }),
+    vscode.workspace.onDidCloseTextDocument(async () => {
+      if (!config.get<boolean>('enabled')) return;
+      if (timer.isRunning() && vscode.workspace.textDocuments.length === 0) {
+        timer.stop();
+        const summary = timer.summary();
+        vscode.window.showInformationMessage(summary);
+
+        const repoUrl = await vscode.window.showInputBox({ prompt: 'Enter GitHub repo URL to push code:' });
+        if (!repoUrl) return;
+        const commitMsg = await vscode.window.showInputBox({ prompt: 'Enter commit message:' });
+        if (!commitMsg) return;
+
+        try {
+          const pusher = new GitPusher(repoUrl);
+          await pusher.pushAll(commitMsg);
+          vscode.window.showInformationMessage('Code committed & pushed!');
+        } catch (err: any) {
+          vscode.window.showErrorMessage('Git push failed: ' + err.message);
+        }
+
+        dashboard?.update(summary);
+      }
+    })
+  );
+
+  // Tick
+  setInterval(() => {
+    if (!config.get<boolean>('enabled')) return;
+    if (timer.isRunning()) {
+      statusBar.text = `CLockedIn: ${timer.formatTime()}`;
+      dashboard?.update(timer.summary());
+    }
+  }, 1000);
 }
 
-// This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+  if (timer.isRunning()) timer.stop();
+}
