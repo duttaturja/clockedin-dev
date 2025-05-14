@@ -16,7 +16,23 @@
     "onCommand:clockedin-dev.showDashboard"
   ],
   "main": "./dist/extension.js",
-  
+  "contributes": {
+    "commands": [
+      { "command": "clockedin.startTimer", "title": "CLockedIn: Start Timer" },
+      { "command": "clockedin.showStats", "title": "CLockedIn: Show Stats" },
+      { "command": "clockedin.showDashboard", "title": "CLockedIn: Show Dashboard" }
+    ],
+    "configuration": {
+      "title": "CLockedIn Settings",
+      "properties": {
+        "clockedin.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable CLockedIn extension features"
+        }
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "npm run check-types && npm run lint && node esbuild.js",
