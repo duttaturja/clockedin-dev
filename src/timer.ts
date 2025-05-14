@@ -18,7 +18,9 @@ export class Timer {
 
   /** total elapsed seconds */
   elapsedSeconds(): number {
-    if (!this.startTime) return 0;
+    if (!this.startTime) {
+        return 0;
+    }
     return Math.floor(((this.endTime ?? Date.now()) - this.startTime) / 1000);
   }
 
