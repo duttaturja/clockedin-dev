@@ -2,6 +2,8 @@
 
 **Track your coding time effortlessly and commit your work seamlessly.**
 
+<img src="https://raw.githubusercontent.com/duttaturja/clockedin-dev/main/media/logo.png" width="200" alt="CLockedIn Logo" />
+
 CLockedIn is a Visual Studio Code extension designed to help developers monitor their coding sessions and streamline the process of committing and pushing code to GitHub repositories.
 
 ---

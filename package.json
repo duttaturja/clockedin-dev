@@ -3,6 +3,12 @@
   "displayName": "ClockedIn",
   "description": "VSCode extension to track coding time for competitive programming problems, auto-push to GitHub, and display stats with a dashboard.",
   "publisher": "duttaturja",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duttaturja/clockedin-dev.git"
+  },
+  "license": "MIT",
+  "icon": "media/logo.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.100.0"
