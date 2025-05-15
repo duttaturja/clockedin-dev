@@ -1,84 +1,98 @@
-# CLockedIn VS Code Extension
+# CLockedIn
 
 <p align="center">
-  <img src="https://github.com/duttaturja/clockedin-dev/blob/master/media/logo.png" width="200" alt="CLockedIn Logo" />
+  <img src="https://raw.githubusercontent.com/duttaturja/clockedin-dev/master/media/logo.png" width="120" />
 </p>
 
 <p align="center">
+  <strong>Track your coding sessions effortlessly and push your work seamlessly.</strong>
+</p>
+
+
+
+<p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=duttaturja.clockedin-dev">
-    <img src="https://img.shields.io/visual-studio-marketplace/v/duttaturja.clockedin-dev?label=VS%20Marketplace&style=for-the-badge" alt="VS Marketplace Version" />
+    <img src="https://img.shields.io/visual-studio-marketplace/v/duttaturja.clockedin-dev?label=VS%20Marketplace&style=for-the-badge" alt="VS Code Marketplace" />
   </a>
+<br>
   <a href="https://marketplace.visualstudio.com/items?itemName=duttaturja.clockedin-dev">
-    <img src="https://img.shields.io/visual-studio-marketplace/i/duttaturja.clockedin-dev?label=Installs&style=for-the-badge" alt="VS Marketplace Installs" />
+    <img src="https://img.shields.io/visual-studio-marketplace/i/duttaturja.clockedin-dev?label=Installs&style=for-the-badge" alt="Installs" />
   </a>
+<br>
   <a href="https://github.com/duttaturja/clockedin-dev/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/duttaturja/clockedin-dev?style=for-the-badge" alt="License: MIT" />
+    <img src="https://img.shields.io/github/license/duttaturja/clockedin-dev?label=License&style=for-the-badge" alt="License" />
   </a>
 </p>
 
 ---
 
-CLockedIn is a Visual Studio Code extension designed to help you track time spent on competitive programming, and automatically push your code to a GitHub repository when you're done.
+## 🚀 Features
+
+* **Automatic Time Tracking**: Starts when you open your first file and stops when all editors are closed.
+* **Smart Formatting**: Displays elapsed time in `h m s`, `m s`, or `s` based on duration.
+* **Status Bar Integration**: Real-time timer in the VS Code status bar.
+* **Interactive Dashboard**: Detailed session stats in a sleek WebView panel.
+* **GitHub Commit & Push**: Prompts for repo URL and commit message, then auto-commits & pushes.
+* **Configurable**: Toggle features on/off via settings.
 
 ---
 
-## ✨ Features
-- ⏱️ Automatically start and stop a timer when editing files.
-- 📊 Show time spent in hrs/mins/secs depending on duration.
-- 🔢 View stats with the `CLockedIn: Show Stats` command.
-- 📋 Open a dashboard with session data.
-- 🌀 Auto commit and push changes to your GitHub repo after coding.
-- ⚙️ Enable/disable the extension via settings.
+## 🖼️ Preview
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/duttaturja/clockedin-dev/master/media/Screenshot1.png" width="50%" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/duttaturja/clockedin-dev/master/media/Screenshot2.png" width="50%" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/duttaturja/clockedin-dev/master/media/Screenshot2.png" width="50%" />
+</p>
+---
+
+<!-- BEGIN-INSTALL-INSTRUCTIONS -->
+
+## 🧩 Installation
+
+1. Visit the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=duttaturja.clockedin-dev).
+2. Click **Install** or search `ClockedIn` in VS Code Extensions panel.
+3. Reload VS Code and enjoy automatic time tracking!
+
+<!-- END-INSTALL-INSTRUCTIONS -->
 
 ---
 
-## 📦 Installation
-Search for `CLockedIn` in the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=duttaturja.clockedin-dev) or clone this repo and run:
+## ⚙️ Configuration
 
-```bash
-npm install
-npm run compile
-code .
-```
+Open **Settings** (`Ctrl+,`) and search for **CLockedIn**:
 
----
-
-## ⚙️ Settings
-| Setting | Type | Default | Description |
-|--------|------|---------|-------------|
-| `clockedin.enabled` | boolean | `true` | Enable or disable all CLockedIn features |
+| Setting             | Type    | Default | Description                      |
+| ------------------- | ------- | ------- | -------------------------------- |
+| `clockedin.enabled` | boolean | `true`  | Enable or disable the extension. |
 
 ---
 
-## 🧪 Commands
-- `CLockedIn: Start Timer`
-- `CLockedIn: Show Stats`
-- `CLockedIn: Show Dashboard`
+## 📄 Commands
 
-Use `Ctrl+Shift+P` to find and run these commands.
-
----
-
-## 📁 Project Structure
-```bash
-├── src
-│   ├── extension.ts    # Main activation logic
-│   ├── timer.ts        # Timer implementation
-│   ├── git.ts          # Git commit & push logic
-│   ├── dashboard.ts    # Webview dashboard
-├── media
-│   └── logo.png        # Extension icon
-├── package.json        # Extension metadata and settings
-└── README.md
-```
+| Command                          | Description                     |
+| -------------------------------- | ------------------------------- |
+| `clockedin.startTimer`           | Manually start the timer.       |
+| `clockedin.stopTimer`            | Manually stop the timer.        |
+| `competitiveTimer.showStats`     | Display session statistics.     |
+| `competitiveTimer.showDashboard` | Open the stats dashboard panel. |
 
 ---
 
-## 📄 License
-This extension is licensed under the [MIT License](https://github.com/duttaturja/clockedin-dev/blob/main/LICENSE).
+## 🤝 Contributing & Maintainer
+
+**Maintained by:** **[@duttaturja](https://github.com/duttaturja)**
+
+Contributions, issues, and feature requests are welcome! Fork the repo and submit a pull request.
 
 ---
 
-## 🔗 Links
-- [GitHub Repository](https://github.com/duttaturja/clockedin-dev)
-- [Developer: duttaturja](https://github.com/duttaturja)
+## ⚖️ License
+
+Licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
